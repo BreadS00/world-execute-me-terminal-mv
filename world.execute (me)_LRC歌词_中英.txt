@@ -1,0 +1,171 @@
+[0000.27]Switch on the power line
+[0001.93]接上电源
+[0001.93]Remember to put on protection
+[0003.95]记得装备好绝缘护具
+[0003.95]Lay down your pieces
+[0005.57]摆好棋子
+[0005.57]And let's begin object creation
+[0007.60]开始吧对象生成
+[0007.60]Fill in my data parameters initialisation
+[0011.24]输入我的参数 并初始化
+[0011.24]Setup our new world
+[0012.93]选择一个我们的世界
+[0012.93]And let's begin the simulation
+[0029.74]然后让我们开始一场模拟游戏
+[0029.74]If I'm a set of points
+[0031.37]如果我是一组点
+[0031.37]Then I will give you my dimension
+[0033.42]那么我将献给你我的另个次元
+[0033.42]If I'm a circle
+[0034.98]如果我是一个圆
+[0034.98]Then I will give you my circumference
+[0037.15]那么我将献给你我的圆周
+[0037.15]If I'm a sine wave
+[0038.73]如果我是一条正弦波
+[0038.73]Then you can sit on all my tangents
+[0040.78]那你可以给予我一套切线
+[0040.78]If I approach infinity
+[0042.42]如果我趋近于无限 那你这是我的
+[0042.42]Then you can be my limitations
+[0044.48]我的一个极限
+[0044.48]Switch my current
+[0046.13]切换我的电流
+[0046.13]To AC to DC
+[0047.94]从交流到直流
+[0047.94]And then blind my vision
+[0049.78]然后蒙上我的眼睛
+[0049.78]So dizzy so dizzy
+[0051.38]让我头晕目眩
+[0051.38]Oh we can travel
+[0053.48]我们可以穿越时空
+[0053.48]To A.D to B.C
+[0055.17]从公元前到现代
+[0055.17]And we can unite
+[0057.17]然后合成一体
+[0057.17]So deeply so deeply
+[0059.40]深深陷入这潭沼泽
+[0059.40]If I can
+[0100.20]如果我能
+[0100.20]If I can give you all the stimulations
+[0102.92]如果我能够给你终极刺激
+[0102.92]Then I can
+[0103.86]那么我就能够
+[0103.86]Then I can be your only satisfaction
+[0106.62]那么我就能够成为你唯一的慰藉
+[0106.62]If I can make you happy
+[0108.48]如果我能够让你开心
+[0108.48]I will run the execution
+[0110.32]那么我将执行指令
+[0110.32]Though we are trapped
+[0111.76]但我们被困
+[0111.76]In this strange strange simulation
+[0114.04]在这个异乎寻常的模拟程序之中
+[0114.04]If I'm an eggplant
+[0115.68]如果我是一根茄子
+[0115.68]Then I will give you my nutrients
+[0117.70]那么我将献给你我所有营养
+[0117.70]If I'm a tomato
+[0119.32]如果我是一颗番茄
+[0119.32]Then I'll give you antioxidants
+[0121.37]那么我将献给你我的抗氧化物
+[0121.37]If I'm a tabby cat
+[0123.06]如果我是一只花猫
+[0123.06]Then I will purr for your enjoyment
+[0125.13]那么我将为你咕噜咕噜 只要你喜欢
+[0125.13]If I'm the only god
+[0126.74]如果我是唯一的神
+[0126.74]Then you're the proof of my existence
+[0128.78]那么你将是我存在的证明
+[0128.78]Switch my gender
+[0130.34]切换我的性别
+[0130.34]To F to M
+[0132.13]从女到男
+[0132.13]And then do whatever
+[0134.09]只做想做的事
+[0134.09]From AM to PM
+[0135.78]从早到晚
+[0135.78]Oh switch my role
+[0137.72]切换我的角色
+[0137.72]To S to M
+[0139.58]从施虐者到被虐者
+[0139.58]So we can enter
+[0141.35]这样我们就可以
+[0141.35]The trance the trance
+[0143.48]享受你我 恍惚出神
+[0143.48]If I can
+[0144.48]如果我能
+[0144.48]If I can feel your vibrations
+[0147.22]如果我能够感受到你的振动
+[0147.22]Then I can
+[0148.16]那么我就能够
+[0148.16]Then I can finally be completion
+[0150.92]那么我就终于能够完成任务
+[0150.92]Though you have left
+[0152.33]但你却是离开了
+[0152.33]You have left
+[0153.25]你还是离开了
+[0153.25]You have left
+[0154.18]你对我说了再见
+[0154.18]You have left
+[0155.08]你还是离开了
+[0155.08]You have left
+[0156.03]你对我说了再见
+[0156.03]You have left me in isolation
+[0158.34]你独留我于独孤之中
+[0158.34]If I can
+[0159.22]如果我能
+[0159.22]If I can erase all the pointless fragments
+[0202.02]如果我能够删除那些无用碎片
+[0202.02]Then maybe
+[0202.97]那么或许我
+[0202.97]Then maybe you won't leave me so disheartened
+[0205.67]那么或许我就不会如此失望
+[0205.67]Challenging your god
+[0209.04]与神做对
+[0209.04]You have made some illegal arguments
+[0227.86]你给我的是非法参数
+[0227.86]Execution execution execution execution
+[0231.56]执行 执行 死刑
+[0231.56]Execution execution execution execution
+[0235.22]执行 执行 死刑
+[0235.22]Execution execution execution execution
+[0238.95]执行 执行 死刑
+[0238.95]Ein Dos Trois Ne Fem Liu
+[0241.72]一 二 三 四 五 六
+[0241.72]Execution
+[0242.72]死刑
+[0242.72]If I can
+[0243.60]如果我能
+[0243.60]If I can give them all the execution
+[0246.31]如果我能够给所有人执行死刑
+[0246.31]Then I can
+[0247.24]那我就是
+[0247.24]Then I can be your only execution
+[0249.99]那我就是你唯一指令
+[0249.99]If I can have you back
+[0251.95]如果你能够回到我身边
+[0251.95]I will run the execution
+[0253.70]那么我将执行死刑
+[0253.70]Though we are trapped
+[0255.14]尽管我们围困其中
+[0255.14]We are trapped ah
+[0257.41]我们围困其中
+[0257.41]I've studied
+[0258.30]我学会了
+[0258.30]I've studied how to properly lo-o-ove
+[0301.16]我学会了如何好好去爱
+[0301.16]Question me
+[0302.09]提问我吧
+[0302.09]Question me I can answer all lo-o-ove
+[0304.83]提问我吧 只要是爱的问题 我全都能答对
+[0304.83]I know the algebraic expression of lo-o-ove
+[0308.48]就连爱的代数表达式我都知道
+[0308.48]Though you are free
+[0309.89]虽然你已自由
+[0309.89]I am trapped
+[0310.77]我仍被困
+[0310.77]Trapped in lo-o-ove
+[0325.96]困于爱里
+[0325.96]Execution
+[0330.096]执行死刑
+[0330.096]

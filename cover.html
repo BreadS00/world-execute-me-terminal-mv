@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>world.execute(me) — cover / 她还在等你的按键</title>
+<style>
+  :root{
+    --bg:#050506;
+    --gray:#8a8a8a;  --dgray:#5a5a5a;  --white:#f2f2f2;
+    --red:#962828;   --pink1:#c86ea5;  --pink2:#8c466e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#101014;color:#ccc;
+    font-family:"Cascadia Code","Consolas","Courier New",monospace;
+    display:flex;flex-direction:column;align-items:center;
+    min-height:100vh;padding:24px 12px;gap:16px;
+  }
+  h1{font-size:14px;color:#666;font-weight:normal;letter-spacing:2px}
+  /* ---------------- the 16:9 stage ---------------- */
+  #stage{
+    --ratio:1.3333;
+    position:relative;width:min(96vw, calc((100vh - 220px) * var(--ratio)), 1280px);
+    aspect-ratio:var(--ratio);background:var(--bg);
+    border:1px solid #222;overflow:hidden;
+    container-type:inline-size;
+  }
+  #tex{position:absolute;inset:0}
+  #tex span{position:absolute;user-select:none}
+  .scan{
+    position:absolute;inset:0;pointer-events:none;opacity:.05;
+    background:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 4px);
+  }
+  .vig{
+    position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 46%,transparent 55%,rgba(0,0,0,.55) 100%);
+  }
+  #st-disconnect{position:absolute;left:3.4%;top:5.5%;color:var(--gray);font-size:2.2cqw}
+  #st-heart{position:absolute;right:3.4%;top:5.5%;color:var(--red);font-size:2.2cqw}
+  #prompt{position:absolute;left:28%;top:44%;color:#9a9a9a;font-size:2.6cqw;white-space:nowrap}
+  #cursor{
+    display:inline-block;width:.58em;height:1.05em;vertical-align:-0.12em;
+    background:var(--white);
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+  #waiting{position:absolute;left:28%;top:51.5%;color:var(--dgray);font-size:2.0cqw}
+  #bigtitle{
+    position:absolute;left:53%;top:52%;white-space:nowrap;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    font-weight:900;font-size:4.9cqw;letter-spacing:.08em;
+    color:#fdfdfd;
+    text-shadow:
+      0 0 1px rgba(0,0,0,.9),
+      0 0 8px rgba(238,230,244,.30),
+      0 0 26px rgba(200,110,165,.24),
+      0 2px 18px rgba(0,0,0,.85);
+    user-select:none;
+  }
+  #hook1{position:absolute;width:100%;text-align:center;top:84%;color:var(--pink1);font-size:2.2cqw}
+  #hook2{position:absolute;width:100%;text-align:center;top:90%;color:var(--pink2);font-size:2.0cqw}
+  /* ---------------- controls (not part of the export) ---------------- */
+  #panel{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;
+    font-size:13px;color:#888;
+  }
+  #panel label{display:flex;align-items:center;gap:6px}
+  input[type=text]{
+    background:#1a1a20;border:1px solid #333;color:#eee;border-radius:4px;
+    padding:6px 10px;width:220px;font-family:inherit;
+  }
+  #in-ratio{
+    width:64px;text-align:center;
+    border-color:#3a3a44;
+  }
+  #in-ratio.err{border-color:#8a2f2f}
+  button{
+    background:#1f1f26;color:#ddd;border:1px solid #3a3a44;border-radius:4px;
+    padding:7px 16px;font-family:inherit;font-size:13px;cursor:pointer;
+  }
+  button:hover{background:#2a2a34;border-color:#555}
+  button.primary{background:#3a1520;border-color:#7a3050}
+  button.primary:hover{background:#4d1b2b}
+  #note{font-size:12px;color:#555;max-width:720px;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+  <h1>world.execute(me) — cover builder</h1>
+
+  <div id="stage">
+    <div id="tex"></div>
+    <div id="st-disconnect">disconnected: you</div>
+    <div id="st-heart">heart: 11 bpm</div>
+    <div id="prompt">me@world:~$ <span id="cursor"></span></div>
+    <div id="waiting">waiting for input</div>
+    <div id="bigtitle">她还在等你的按键</div>
+    <div id="hook1">// this terminal is her only way to touch you</div>
+    <div id="hook2">// she is still waiting for your keystroke</div>
+    <div class="scan"></div>
+    <div class="vig"></div>
+  </div>
+
+  <div id="panel">
+    <label>比例 <input type="text" id="in-ratio" value="4:3" maxlength="10"
+           title="如 4:3 / 16:9 / 1:1 / 21:9 / 1.777"></label>
+    <label><input type="checkbox" id="cb-title" checked>大标题</label>
+    <input type="text" id="in-title" value="她还在等你的按键" maxlength="12">
+    <label><input type="checkbox" id="cb-hook" checked>英文注释行</label>
+    <button id="btn-roll">换纹理</button>
+    <button id="btn-dl" class="primary">下载 PNG (1920&times;1440)</button>
+  </div>
+  <div id="note">
+    比例栏可随意输入（4:3 / 16:9 / 1:1 / 21:9，或小数 1.777），舞台与导出尺寸即时联动。
+    大标题在 waiting for input 右侧，微泛光描边样式。导出为静态高清封面
+    （光标取点亮状态）。要 4K 改代码里 EXPORT_W 即可。
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var tex = document.getElementById("tex");
+  var CHARS = "/|-\\*+.";            // dying-screen remnants
+  var texData = [];
+  var seed = 1109;                   // 1:52, when you left
+
+  function mulberry(a){               // tiny seeded rng
+    return function(){
+      a|=0; a=(a+0x6D2B79F5)|0;
+      var t=Math.imul(a^(a>>>15),1|a);
+      t=(t+Math.imul(t^(t>>>7),61|t))^t;
+      return ((t^(t>>>14))>>>0)/4294967296;
+    };
+  }
+
+  function rollTex(){
+    texData = [];
+    var rnd = mulberry(seed++);
+    var n = 110;
+    for(var i=0;i<n;i++){
+      var x = rnd()*100, y = rnd()*100;
+      // keep the prompt/title band quiet so text stays readable
+      if(x>20 && y>34 && y<65) continue;
+      var b = rnd();
+      texData.push({
+        x:x, y:y,
+        ch:CHARS[(rnd()*CHARS.length)|0],
+        col: b<.72 ? "rgba(120,120,130,"+(0.10+rnd()*0.16).toFixed(2)+")"
+                   : "rgba(110,140,190,"+(0.10+rnd()*0.14).toFixed(2)+")",
+        fs: 0.9+rnd()*1.1
+      });
+    }
+    renderTex();
+  }
+
+  function renderTex(){
+    var html = "";
+    for(var i=0;i<texData.length;i++){
+      var d = texData[i];
+      html += '<span style="left:'+d.x.toFixed(2)+"%;top:"+d.y.toFixed(2)+
+              "%;color:"+d.col+";font-size:"+(1.4*d.fs).toFixed(2)+'cqw">'+d.ch+"</span>";
+    }
+    tex.innerHTML = html;
+  }
+
+  /* ---------------- PNG export ---------------- */
+  var EXPORT_W = 1920;                    // long-side base, keep even
+  var ratio = 4 / 3;
+
+  function parseRatio(s){
+    s = (s || "").trim().toLowerCase().replace(",", ".");
+    var m = s.match(/^(\d+(?:\.\d+)?)\s*[:x\/]\s*(\d+(?:\.\d+)?)$/);
+    if(m){
+      var a = +m[1], b = +m[2];
+      if(a > 0 && b > 0) return a / b;
+    }
+    if(/^\d+(?:\.\d+)?$/.test(s)){
+      var v = parseFloat(s);
+      if(v > 0.2 && v < 10) return v;
+    }
+    return null;
+  }
+
+  function applyRatio(r, label){
+    ratio = r;
+    document.getElementById("stage").style.setProperty("--ratio", String(r));
+    updateDlLabel();
+    if(label !== undefined)
+      document.getElementById("in-ratio").value = label;
+  }
+
+  function exportDims(){
+    var H = Math.max(2, Math.round(EXPORT_W / ratio / 2) * 2);   // even pixels
+    return [EXPORT_W, H];
+  }
+
+  function updateDlLabel(){
+    var d = exportDims();
+    document.getElementById("btn-dl").textContent =
+      "下载 PNG (" + d[0] + "\u00D7" + d[1] + ")";
+  }
+
+  function exportPNG(){
+    var cv = document.createElement("canvas");
+    var DIMS = exportDims();
+    cv.width = DIMS[0]; cv.height = DIMS[1];
+    var g = cv.getContext("2d");
+    var W = DIMS[0], H = DIMS[1];
+    var MONO = '"Cascadia Code","Consolas","Courier New",monospace';
+    var SANS = '"Microsoft YaHei","PingFang SC",sans-serif';
+
+    g.fillStyle = "#050506"; g.fillRect(0,0,W,H);
+
+    // texture
+    g.textBaseline = "top";
+    for(var i=0;i<texData.length;i++){
+      var d = texData[i];
+      g.font = Math.round(26*d.fs)+"px "+MONO;
+      g.fillStyle = d.col;
+      g.fillText(d.ch, d.x/100*W, d.y/100*H);
+    }
+
+    // status lines
+    g.font = "42px "+MONO;
+    g.fillStyle = "#8a8a8a";
+    g.fillText("disconnected: you", .034*W, .052*H);
+    g.fillStyle = "#962828";
+    var hw = g.measureText("heart: 11 bpm").width;
+    g.fillText("heart: 11 bpm", W-.034*W-hw, .052*H);
+
+    // prompt + cursor (frozen lit)
+    g.font = "bold 50px "+MONO;
+    g.fillStyle = "#9a9a9a";
+    g.fillText("me@world:~$", .28*W, .435*H);
+    var pw = g.measureText("me@world:~$ ").width;
+    g.fillStyle = "#f2f2f2";
+    g.fillRect(.28*W+pw, .435*H+6, 22, 52);          // normal-size block cursor
+
+    g.font = "38px "+MONO;
+    g.fillStyle = "#5a5a5a";
+    g.fillText("waiting for input", .28*W, .515*H);
+
+    // big title -- faint-glow outline, lower-right of "waiting for input"
+    if(document.getElementById("cb-title").checked){
+      var t = document.getElementById("in-title").value || "她还在等你的按键";
+      var fit = Math.min(1, 8 / Math.max(1, t.length));   // keep inside the frame
+      var fs = Math.round(W * 0.049 * fit);
+      g.font = "900 "+fs+"px "+SANS;
+      var tx = .53*W, ty = .52*H;
+      g.lineJoin = "round";
+      // pass 1: dark separation from the texture
+      g.lineWidth = 9; g.strokeStyle = "rgba(0,0,0,.85)";
+      g.shadowColor = "rgba(0,0,0,.8)"; g.shadowBlur = 16;
+      g.strokeText(t, tx, ty);
+      g.shadowBlur = 0;
+      // pass 2: faint glowing stroke
+      g.lineWidth = Math.max(3, fs*0.045);
+      g.strokeStyle = "rgba(238,230,244,.55)";
+      g.shadowColor = "rgba(200,110,165,.5)"; g.shadowBlur = 26;
+      g.strokeText(t, tx, ty);
+      // pass 3: crisp white fill
+      g.fillStyle = "#fdfdfd";
+      g.fillText(t, tx, ty);
+      g.shadowBlur = 0;
+    }
+
+    // english hooks
+    if(document.getElementById("cb-hook").checked){
+      g.fillStyle = "#c86ea5";
+      centerText(g, "// this terminal is her only way to touch you", .84*H, W, MONO, 42);
+      g.fillStyle = "#8c466e";
+      centerText(g, "// she is still waiting for your keystroke", .90*H, W, MONO, 38);
+    }
+
+    // scanlines + vignette (match the live look)
+    g.fillStyle = "rgba(255,255,255,0.045)";
+    for(var y=0;y<H;y+=4) g.fillRect(0,y,W,1);
+    var rg = g.createRadialGradient(W/2,H*.46,H*.35, W/2,H*.46,H*1.05);
+    rg.addColorStop(0,"rgba(0,0,0,0)");
+    rg.addColorStop(1,"rgba(0,0,0,0.55)");
+    g.fillStyle = rg; g.fillRect(0,0,W,H);
+
+    var a = document.createElement("a");
+    a.download = "cover_waiting_"+W+"x"+H+".png";
+    a.href = cv.toDataURL("image/png");
+    a.click();
+  }
+
+  function centerText(g, s, y, W, font, size){
+    g.font = size+"px "+font;
+    g.textAlign = "center";
+    g.fillText(s, W/2, y);
+    g.textAlign = "left";
+  }
+
+  /* ---------------- wire up ---------------- */
+  document.getElementById("btn-dl").addEventListener("click", exportPNG);
+  document.getElementById("btn-roll").addEventListener("click", rollTex);
+  var inRatio = document.getElementById("in-ratio");
+  inRatio.addEventListener("change", function(){
+    var r = parseRatio(this.value);
+    if(r === null){
+      this.classList.add("err");
+      var self = this;
+      setTimeout(function(){
+        self.classList.remove("err");
+        self.value = ratioToStr(ratio);
+      }, 700);
+    }else{
+      applyRatio(r);
+    }
+  });
+  function ratioToStr(r){
+    // show it back as a friendly W:H when it is a common one
+    var common = [[4,3],[16,9],[1,1],[21,9],[3,4],[9,16],[5,4],[2,1]];
+    for(var i=0;i<common.length;i++){
+      if(Math.abs(r - common[i][0]/common[i][1]) < 0.002)
+        return common[i][0] + ":" + common[i][1];
+    }
+    return r.toFixed(3).replace(/0+$/,"").replace(/\.$/,"");
+  }
+  document.getElementById("in-title").addEventListener("input", function(){
+    var el = document.getElementById("bigtitle");
+    el.textContent = this.value;
+    el.style.fontSize = Math.min(4.9, 4.9 * 8 / Math.max(1, this.value.length)) + "cqw";
+  });
+  document.getElementById("cb-title").addEventListener("change", function(){
+    document.getElementById("bigtitle").style.display = this.checked ? "" : "none";
+  });
+  document.getElementById("cb-hook").addEventListener("change", function(){
+    var v = this.checked ? "" : "none";
+    document.getElementById("hook1").style.display = v;
+    document.getElementById("hook2").style.display = v;
+  });
+
+  rollTex();
+  updateDlLabel();
+})();
+</script>
+</body>
+</html>

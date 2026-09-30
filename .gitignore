@@ -1,0 +1,13 @@
+# generated artifacts (regenerate with the script itself)
+shots/
+cover/
+
+# caches
+__pycache__/
+*.pyc
+
+# never commit audio / logs
+*.mp3
+*.wav
+*.flac
+*.log
