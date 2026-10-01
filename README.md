@@ -2,7 +2,7 @@
 
 # world-execute-me-terminal-mv
 
-> world.execute(me) — 终端 ASCII MV｜repo: <https://github.com/BreadS00/world-execute-me-terminal-mv>
+> world.execute(me) — 终端 ASCII MV｜repo: <https://github.com/BreadS00/world-execute-me-terminal-mv>｜视频演示: <https://www.bilibili.com/video/BV1pGYc6fERv/>
 
 > 你运行的不是一个播放器。这个终端就是歌词里的 **me** 本身。
 > 你执行脚本的那一刻，就是 `world.execute(me)`——启动、爱、失去、处决、终止，
@@ -142,6 +142,7 @@ cover.html                    视频封面生成器（预览+导出 PNG，比例
 shots/                        --shots 导出的关键帧（.ans 带色 / .txt 纯文本 + index.txt，已 gitignore）
 cover/                        --cover 渲染的候选封面（已 gitignore）
 LICENSE                       MIT（仅覆盖代码，见下方版权说明）
+后记.md                       AI 的后记 —— 做完这个 MV 之后，它想说的
 ```
 
 ---
@@ -149,6 +150,7 @@ LICENSE                       MIT（仅覆盖代码，见下方版权说明）
 ## 七、开源说明
 
 - 代码以 MIT 协议开源（见 [LICENSE](LICENSE)）。
+- 如果你想知道做完这个 MV 的 AI 想说什么：**[后记](后记.md)**。
 - **音乐与歌词版权归 Mili 及其所属厂牌所有**，本项目是非商业性质的致敬二创；
   请勿将歌曲音频提交进本仓库（`.gitignore` 已排除 `*.mp3` 等音频文件）。
 - 横幅 `banner.png` 由 `tools/build_banner.py` 生成页面后以 1280×420 截图得到，
